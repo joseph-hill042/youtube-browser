@@ -1,10 +1,18 @@
 import React from 'react';
+import VideoListItem from './VideoListItem.jsx';
 
 const VideoList = (props) => {
+
+    const style = {
+      display: 'flex',
+      flexFlow: 'row wrap',
+      justifyContent: 'space-around'
+    };
+    const videoItems = props.videos.map(video => <VideoListItem key={video.etag} video={video}/>);
   return (
-      <ul className='video-list'>
-          {props.videos.length}
-      </ul>
+      <div style={style}>
+          {videoItems}
+      </div>
   )
 };
 

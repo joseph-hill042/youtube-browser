@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
-import AppBar from 'material-ui/AppBar';
-import TextField from 'material-ui/TextField';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import Search from 'material-ui/svg-icons/action/search';
-import { yellow100 } from 'material-ui/styles/colors';
+import AppBar from '@material-ui/core/AppBar';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Search from '@material-ui/icons/Search';
+import Typography from '@material-ui/core/Typography';
 
-
-const styles = {
-    underlineStyle: {
-        borderColor: yellow100,
-    },
-    floatingLabelStyle: {
-        color: '#fff',
-    },
-    floatingLabelFocusStyle: {
-        color: yellow100    ,
-    },
+const style = {
+    display: 'flex',
+    justifyContent: 'space-between'
 };
 
 class SearchBar extends Component {
@@ -25,25 +17,29 @@ class SearchBar extends Component {
         this.state = { term: '' };
     }
 
+    onInputChange(term) {
+        this.setState({term});
+        this.props.onSearchTermChange(term);
+    }
+
     render() {
         return (
-            <AppBar
-                title='Youtube Browser'
-                iconElementRight={
-                    <span>
+                <AppBar>
+                    <div style={style}>
+                        <Typography variant="title" color="inherit">
+                            Youtube Browser
+                        </Typography>
+                        <span>
                         <TextField
-                            onChange={e => this.setState({ term: e.target.value })}
-                            floatingLabelText="Search Videos"
-                            underlineFocusStyle={styles.underlineStyle}
-                            floatingLabelStyle={styles.floatingLabelStyle}
-                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                            onChange={e => this.onInputChange(e.target.value )}
+                            label="Search Videos"
                         />
-                        <FloatingActionButton mini={true}>
+                        <Button mini variant="fab" color="primary">
                             <Search/>
-                        </FloatingActionButton>
+                        </Button>
                     </span>
-                }
-            />
+                    </div>
+                </AppBar>
         )
     }
 }
